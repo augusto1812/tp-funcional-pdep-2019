@@ -33,7 +33,9 @@ impresionar unParticipante = unParticipante {velocidad = ((*2).velocidad) unPart
 nitro :: Participante-> Participante
 nitro unParticipante = unParticipante {velocidad = ((+15).velocidad) unParticipante}
 
---no se como hacer fingir amor
+fingirAmor :: Participante -> String -> Participante 
+fingirAmor unParticipante amorcitonuevo = unParticipante {enamorade = amorcitonuevo} --estara bien (?)
+
 
 
  
