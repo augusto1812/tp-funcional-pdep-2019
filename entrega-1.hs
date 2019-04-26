@@ -11,16 +11,16 @@ data Participante = Participante {
                                   deriving (Show)
 
 --PUNTO 1: 2) 
- deReversa :: Float -> Float -> Float 
- deReversa nivelDeNafta = (+nivelDeNafta).(/5) 
+ deReversa :: Participante -> Participante
+ deReversa unParticipante = unParticipante  {nivelDeNafta = ((+nivelDeNafta).(/5)) unParticipante}
  --preguntar por qué te dice que la pista tiene 100m, o sea que siempre la distancia va a ser 200 (1/5 de mil) 
  --sino seria esta la funcion: -- deReversa = (+200)
 
- impresionar :: Int -> Int 
- impresionar = (*2)
+ impresionar :: Participante -> Participante
+ impresionar unParticipante = unParticipante {velocidad = (*2)}
 
- nitro :: Int -> Int 
- nitro = (+15)
+ nitro :: Participante-> Participante
+ nitro unParticipante = unParticipante {velocidad = (+15)}
 
 --no se como hacer fingir amor
 
