@@ -12,15 +12,15 @@ data Participante = Participante {
                                   
 --Autos
 
-rochaMcQueen = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0 -- enamorade = "ronco" -- truco = deReversa }
+rochaMcQueen = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0 enamorade = "ronco" -- truco = deReversa }
 
 --No entiendo si su enamorade va a ser otro participante (de tipo data) o solo ponemos el nombre --de su enamorade ( o sea, un String)
 
-biankerr = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20 -- enamorade = tinch --truco = impresionar }
+biankerr = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20  enamorade = "tinch" --truco = impresionar }
 
-gushtav = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130 -- enamorada = PetiLaLinda -- truco = nitr }
+gushtav = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130 enamorade = "PetiLaLinda" -- truco = nitr }
 
-rodra = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50 -- enamorada = Taisa -- truco = fingirAmor con petra ??? no se como hacer esto ayuda }
+rodra = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50 enamorade = "Taisa" -- truco = fingirAmor con petra ??? no se como hacer esto ayuda }
 
 --PUNTO 1: 2) 
 deReversa :: Participante -> Participante
