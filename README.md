@@ -47,3 +47,19 @@ biankerr = Participante {
 -- enamorade = tinch
 --truco = impresionar
 }
+
+gushtav = Participante {
+    nombre       = "Gushtav",
+    nivelDeNafta = 200,
+    velocidad    = 130
+-- enamorada = PetiLaLinda
+-- truco  = nitr
+}
+
+rodra = Participante {
+    nombre       = "Rodra",
+    nivelDeNafta = 0,
+    velocidad    = 50
+-- enamorada = Taisa
+-- truco = fingirAmor con petra ??? no se como hacer esto ayuda 
+}
