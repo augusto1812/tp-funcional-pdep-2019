@@ -1,41 +1,51 @@
 import Text.Show.Functions
 
---PUNTO 1: Modelado de autos y trucos
-
+-- PUNTO 1.1
+-- Tipo de dato Auto
 data Participante = Participante { 
                                   nombre :: String, 
                                   nivelDeNafta :: Int, 
                                   velocidad :: Int, 
-                                  enamorade :: Participante}
+                                  enamorade :: String}
                                   -- truco :: }
                                   deriving (Show)
                                   
---Autos
+-- Autos
+rochaMcQueen  = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0 enamorade = "Ronco" -- truco = deReversa }
 
-rochaMcQueen = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0 enamorade = "ronco" -- truco = deReversa }
+biankerr      = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20  enamorade = "Tinch" --truco = impresionar }
 
---No entiendo si su enamorade va a ser otro participante (de tipo data) o solo ponemos el nombre --de su enamorade ( o sea, un String)
+gushtav       = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130 enamorade = "PetiLaLinda" -- truco = nitr }
 
-biankerr = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20  enamorade = "tinch" --truco = impresionar }
+rodra         = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50 enamorade = "Taisa" -- truco = fingirAmor con petra }
 
-gushtav = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130 enamorade = "PetiLaLinda" -- truco = nitr }
-
-rodra = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50 enamorade = "Taisa" -- truco = fingirAmor con petra ??? no se como hacer esto ayuda }
-
---PUNTO 1: 2) 
+-- PUNTO 1.2
+-- Trucos
 deReversa :: Participante -> Participante
-deReversa unParticipante = unParticipante  {nivelDeNafta = ((+200).nivelDeNafta) unParticipante}
- --preguntar por qué te dice que la pista tiene 100m, o sea que siempre la distancia va a ser 200 (1/5 de mil) 
- --sino seria esta la funcion: -- deReversa = (+200)
-nitro :: Participante-> Participante
-impresionar unParticipante = unParticipante {velocidad = ((*2).velocidad) unParticipante}
+deReversa uneParticipante = uneParticipante  {nivelDeNafta = ((+200).nivelDeNafta) uneParticipante}
+-- Con la pista de 1000m, la función aumenta siempre 200 (1000/5) y sería
+-- deReversa = (+200)
 
-nitro :: Participante-> Participante
-nitro unParticipante = unParticipante {velocidad = ((+15).velocidad) unParticipante}
+impresionar :: Participante -> Participante
+impresionar uneParticipante = uneParticipante {velocidad = ((*2).velocidad) uneParticipante}
+
+nitro :: Participante -> Participante
+nitro uneParticipante = uneParticipante {velocidad = ((+15).velocidad) uneParticipante}
 
 fingirAmor :: Participante -> String -> Participante 
-fingirAmor unParticipante amorcitonuevo = unParticipante {enamorade = amorcitonuevo} --estara bien (?)
+fingirAmor uneParticipante nueveEnamorade = uneParticipante {enamorade = nueveEnamorade}
 
+-- PUNTO 2
+incrementarVelocidad :: Participante -> Participante
 
+-- PUNTO 3
+puedeRealizarTruco :: Participante -> Bool
 
- 
+-- PUNTO 4
+-- Nuevos trucos
+comboLoco :: Participante -> Participante
+
+queTrucazo :: Participante -> Participante
+
+turbo :: Participante -> Participante
+
