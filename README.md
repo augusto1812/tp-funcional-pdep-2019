@@ -1,65 +1,94 @@
-# tp-funcional-pdep-2019
-Trabajo Práctico Funcional Paradigmas de Programacion 2019
+TP Funcional - Paradigmas de Programacion 2019
+==============================================
 
-import Text.Show.Functions
+## Casos de prueba
 
---PUNTO 1: Modelado de autos y trucos
---PUNTO 1: 1)
-data Participante = Participante {
-    nombre              :: String,
-    nivelDeNafta        :: Int,
-    velocidad           :: Int,
-    enamorade           :: Participante
- --   truco               :: 
-} deriving (Show)
+----------------------------------------------
+**PUNTO 3.1**
+_Consultar la nafta de RochaMcQueen luego de realizar su truco._
+`realizarTruco rocha`
+`nivelDeNafta rocha`
+`500`
 
---PUNTO 1: 2)
-deReversa :: Float -> Float -> Float
-deReversa nivelDeNafta = (+nivelDeNafta).(/5)
---preguntar por qué te dice que la pista tiene 100m, o sea que siempre la distancia va a ser 200 (1/5 de mil)
---sino seria esta la funcion:
--- deReversa = (+200)
+_Consultar la velocidad de Biankerr luego de realizar su truco._
+`realizarTruco biankerr`
+`velocidad biankerr`
+`40`
 
-impresionar :: Int -> Int
-impresionar = (*2)
+_Consultar la enamorada de Rodra cuando elige a Petra._
+`elegirEnamorade rodra petra`
+`enamorade rodra`
+`Petra`
 
-nitro :: Int -> Int
-nitro = (+15)
+----------------------------------------------
+**PUNTO 3.2**
+_Consultar la velocidad de RochaMcQueen luego de incrementar su velocidad._
+`incrementarVelocidad rocha`
+`velocidad rocha`
+`15`
 
---no se como hacer fingir amor
+_Consultar la velocidad de Biankerr luego de incrementar su velocidad._
+`incrementarVelocidad biankerr`
+`velocidad biankerr`
+`35`
 
---PUNTO 1: 3)
-rochaMcQueen = Participante {
-    nombre       = "Rocha McQueen",
-    nivelDeNafta = 300,
-    velocidad    = 0
---    enamorade    = "ronco"
--- truco = deReversa
-}
+_Consultar la velocidad de Gushtav luego de incrementar su velocidad._
+`incrementarVelocidad gushtav`
+`velocidad gushtav`
+`160`
 
---No entiendo si su enamorade va a ser otro participante (de tipo data) o solo ponemos el nombre 
---de su enamorade ( o sea, un String)
+_Consultar la velocidad de Rodra luego de incrementar su velocidad._
+`incrementarVelocidad rodra`
+`velocidad rodra`
+`70`
 
-biankerr = Participante {
-    nombre = "Biankerr",
-    nivelDeNafta = 500,
-    velocidad = 20
--- enamorade = tinch
---truco = impresionar
-}
+----------------------------------------------
+**PUNTO 3.3**
+_Consultar si RochaMcQueen puede usar su truco._
+`puedeUsarTruco rochaMcQueen`
+`Verdadero`
 
-gushtav = Participante {
-    nombre       = "Gushtav",
-    nivelDeNafta = 200,
-    velocidad    = 130
--- enamorada = PetiLaLinda
--- truco  = nitr
-}
+_Consultar si Gushtav puede usar su truco._
+`puedeUsarTruco gushtav`
+`Falso`
 
-rodra = Participante {
-    nombre       = "Rodra",
-    nivelDeNafta = 0,
-    velocidad    = 50
--- enamorada = Taisa
--- truco = fingirAmor con petra ??? no se como hacer esto ayuda 
-}
+_Consultar si Rodra puede usar su truco._
+`puedeUsarTruco rodra`
+`Falso`
+
+----------------------------------------------
+**PUNTO 3.4**
+_Consultar la nafta de Rocha luego de realizar comboLoco_
+`comboLoco rocha`
+`nivelDeNafta rocha`
+`500`
+
+_Consultar la velocidad de Rocha luego de realizar comboLoco_
+`comboLoco rocha`
+`velocidad rocha`
+`15`
+
+_Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamorada a Murcielago_
+`queTrucazo rodra Murcielago`
+`velocidad rodra`
+`80`
+
+_Consultar la velocidad de Gushtav luego de utilizar turbo_
+`turbo gushtav`
+`velocidad gushtav`
+`2130`
+
+_Consultar la nafta de Gushtav luego de utilizar turbo_
+`turbo gushtav`
+`nafta gushtav`
+`0`
+
+_Consultar la velocidad de Rodra luego de utilizar turbo_
+`turbo rodra`
+`velocidad rodra`
+`50`
+
+_Consultar la nafta de Rodra luego de utilizar turbo_
+`turbo rodra`
+`nafta rodra`
+`0`
