@@ -37,9 +37,10 @@ fingirAmor uneParticipante nueveEnamorade = uneParticipante {enamorade = nueveEn
 
 -- PUNTO 2
 incrementarVelocidad :: Participante -> Participante
-
+  
 -- PUNTO 3
 puedeRealizarTruco :: Participante -> Bool
+puedeRealizarTruco (uneParticipante _ nafta velocidad _ _) = (nafa != 0) && (velocidad < 100) 
 
 -- PUNTO 4
 -- Nuevos trucos
@@ -48,4 +49,3 @@ comboLoco :: Participante -> Participante
 queTrucazo :: Participante -> Participante
 
 turbo :: Participante -> Participante
-
