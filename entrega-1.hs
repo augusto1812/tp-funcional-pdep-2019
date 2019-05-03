@@ -11,13 +11,13 @@ data Participante = Participante {
                                   deriving (Show)
                                   
 -- Autos
-rochaMcQueen  = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0 enamorade = "Ronco" truco = "deReversa" }
+rochaMcQueen  = Participante { nombre = "Rocha McQueen", nivelDeNafta = 300, velocidad = 0, enamorade = "Ronco", truco = "deReversa" }
 
-biankerr      = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20  enamorade = "Tinch" truco = "impresionar" }
+biankerr      = Participante { nombre = "Biankerr", nivelDeNafta = 500, velocidad = 20,  enamorade = "Tinch", truco = "impresionar" }
 
-gushtav       = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130 enamorade = "PetiLaLinda" truco = "nitro"}
+gushtav       = Participante { nombre = "Gushtav", nivelDeNafta = 200, velocidad = 130, enamorade = "PetiLaLinda", truco = "nitro"}
 
-rodra         = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50 enamorade = "Taisa" truco = "fingirAmor" }
+rodra         = Participante { nombre = "Rodra", nivelDeNafta = 0, velocidad = 50, enamorade = "Taisa", truco = "fingirAmor" }
 
 -- PUNTO 1.2
 -- Trucos
