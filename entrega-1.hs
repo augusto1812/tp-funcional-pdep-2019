@@ -15,7 +15,7 @@ rochaMcQueen  = Participante {
     nombre = "Rocha McQueen",
     nivelDeNafta = 300,
     velocidad = 0,
-    enamorade = "Ronco"
+    enamorade = "Ronco",
     truco = deReversa 
 }
 
@@ -23,7 +23,7 @@ biankerr = Participante {
     nombre = "Biankerr", 
     nivelDeNafta = 500, 
     velocidad = 20,  
-    enamorade = "Tinch"
+    enamorade = "Tinch",
     truco = impresionar 
 }
 
@@ -31,7 +31,7 @@ gushtav = Participante {
     nombre = "Gushtav", 
     nivelDeNafta = 200, 
     velocidad = 130, 
-    enamorade = "PetiLaLinda"
+    enamorade = "PetiLaLinda",
     truco = nitro 
 }
 
@@ -39,8 +39,8 @@ rodra = Participante {
     nombre = "Rodra", 
     nivelDeNafta = 0, 
     velocidad = 50, 
-    enamorade = "Taisa"
-    truco = fingirAmor ? petra 
+    enamorade = "Taisa",
+    truco = (fingirAmor "Petra")
 }
 
 -- PUNTO 1.2
@@ -48,7 +48,8 @@ rodra = Participante {
 deReversa :: Participante -> Participante
 deReversa uneParticipante = 
     uneParticipante  {nivelDeNafta = ((+200).nivelDeNafta) uneParticipante}
--- Con la pista de 1000m, la función aumenta siempre 200 (1000/5)
+-- Con la pista de 1000m, la función aumenta siempre 200 (1000/5) y sería
+-- deReversa = (+200)
 
 impresionar :: Participante -> Participante
 impresionar uneParticipante = 
@@ -58,28 +59,28 @@ nitro :: Participante -> Participante
 nitro uneParticipante = 
     uneParticipante {velocidad = ((+15).velocidad) uneParticipante}
 
-fingirAmor :: Participante -> String -> Participante 
-fingirAmor uneParticipante nueveEnamorade = 
+fingirAmor :: String -> Participante -> Participante 
+fingirAmor nueveEnamorade uneParticipante = 
     uneParticipante {enamorade = nueveEnamorade}
 
 -- PUNTO 2
-vocales :: String -> Bool
-vocales  = any ( 'a' || 'e' || 'i' || 'o' || 'u' ) 
+esVocal :: Char -> Bool
+esVocal letra = 
+    ((letra == 'a') || (letra =='e') || (letra =='i') || (letra =='o') || (letra =='u'))
 
-sacandoVocales :: Participante -> [Char]
-sacandoVocales (Participante _ _ _ enamorade _ ) = filter (vocales) enamorade
+obtenerVocales :: Participante -> [Char]
+obtenerVocales (Participante _ _ _ enamorade _) = 
+    filter (esVocal) enamorade
 
-largoDelNombreDeLaEnamorada :: [Char] -> Int
-largoDelNombreDeLaEnamorada  = (length) . (sacandoVocales)
+cantidadDeVocalesDeEnamorade :: Participante -> Int
+cantidadDeVocalesDeEnamorade  = length . obtenerVocales
 
 incrementarVelocidad :: Participante -> Participante
-incrementarVelocidad (Participante _ _ velocidad enamorade _ ) = 
-    (largoDelNombreDeLaEnamorada == 1)  (||) . (largoDelNombreDeLaEnamorada == 2) = nitro
-incrementarVelocidad (Participante _ _ velocidad enamorade _ ) = 
-    (largoDelNombreDeLaEnamorada == 3) (||) . (largoDelNombreDeLaEnamorada == 4) = velocidad + 20
-incrementarVelocidad (Participante _ _ velocidad enamorade _ ) = 
-    (largoDelNombreDeLaEnamorada > 4) = velocidad + 30
-    
+incrementarVelocidad uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 1) || (cantidadDeVocalesDeEnamorade uneParticipante == 2) = uneParticipante {velocidad = ((+15).velocidad) uneParticipante}
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 3) || (cantidadDeVocalesDeEnamorade uneParticipante == 4) = uneParticipante {velocidad = ((+20).velocidad) uneParticipante}
+    | (cantidadDeVocalesDeEnamorade uneParticipante > 4) = uneParticipante {velocidad = ((+30).velocidad) uneParticipante}
+  
 -- PUNTO 3
 puedeRealizarTruco :: Participante -> Bool
 puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) = 
@@ -90,9 +91,9 @@ puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) =
 comboLoco :: Participante -> Participante
 comboLoco = deReversa.nitro 
 
-queTrucazo :: Participante -> Participante
-queTrucazo uneParticipante = 
-  incrementarVelocidad.fingirAmor
+queTrucazo :: String -> Participante -> Participante
+queTrucazo nueveEnamorade = 
+  incrementarVelocidad.(fingirAmor nueveEnamorade)
 
 turbo :: Participante -> Participante
 turbo uneParticipante =
