@@ -6,9 +6,9 @@ data Participante = Participante {
                                   nombre :: String, 
                                   nivelDeNafta :: Int, 
                                   velocidad :: Int, 
-                                  enamorade :: String,}
-                                  truco :: String}
-                                  deriving (Show)
+                                  enamorade :: String,
+                                  truco :: (Participante -> Participante)
+                                  } deriving (Show)
                                   
 -- Autos
 rochaMcQueen  = Participante { 
@@ -16,7 +16,7 @@ rochaMcQueen  = Participante {
     nivelDeNafta = 300,
     velocidad = 0,
     enamorade = "Ronco"
- -- truco = deReversa 
+    truco = deReversa 
 }
 
 biankerr = Participante { 
@@ -24,7 +24,7 @@ biankerr = Participante {
     nivelDeNafta = 500, 
     velocidad = 20,  
     enamorade = "Tinch"
-    --truco = impresionar 
+    truco = impresionar 
 }
 
 gushtav = Participante {
@@ -32,7 +32,7 @@ gushtav = Participante {
     nivelDeNafta = 200, 
     velocidad = 130, 
     enamorade = "PetiLaLinda"
-    -- truco = nitro 
+    truco = nitro 
 }
 
 rodra = Participante { 
@@ -40,7 +40,7 @@ rodra = Participante {
     nivelDeNafta = 0, 
     velocidad = 50, 
     enamorade = "Taisa"
-    -- truco = fingirAmor petra 
+    truco = fingirAmor ? petra 
 }
 
 -- PUNTO 1.2
@@ -48,8 +48,7 @@ rodra = Participante {
 deReversa :: Participante -> Participante
 deReversa uneParticipante = 
     uneParticipante  {nivelDeNafta = ((+200).nivelDeNafta) uneParticipante}
--- Con la pista de 1000m, la función aumenta siempre 200 (1000/5) y sería
--- deReversa = (+200)
+-- Con la pista de 1000m, la función aumenta siempre 200 (1000/5)
 
 impresionar :: Participante -> Participante
 impresionar uneParticipante = 
@@ -83,7 +82,7 @@ incrementarVelocidad (Participante _ _ velocidad enamorade _ ) =
     
 -- PUNTO 3
 puedeRealizarTruco :: Participante -> Bool
-puedeRealizarTruco (Participante _ nivelDeNafta velocidad _) = 
+puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) = 
     (nivelDeNafta /= 0) && (velocidad < 100)
 
 -- PUNTO 4
@@ -98,5 +97,3 @@ queTrucazo uneParticipante =
 turbo :: Participante -> Participante
 turbo uneParticipante =
     uneParticipante {velocidad = ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
-
-
