@@ -4,91 +4,77 @@ TP Funcional - Paradigmas de Programacion 2019
 ## Casos de prueba
 
 ----------------------------------------------
-**PUNTO 3.1**  
+**PUNTO 3.1**  ✅
 _Consultar la nafta de RochaMcQueen luego de realizar su truco._  
-`realizarTruco rocha`  
-`nivelDeNafta rocha`  
+`nivelDeNafta (deReversa rochaMcQueen)`  
 `500`  
 
 _Consultar la velocidad de Biankerr luego de realizar su truco._  
-`realizarTruco biankerr`  
-`velocidad biankerr`  
+`velocidad (impresionar biankerr)`  
 `40`  
 
 _Consultar la enamorada de Rodra cuando elige a Petra._  
-`elegirEnamorade rodra petra`  
-`enamorade rodra`  
+`enamorade (fingirAmor rodra "Petra")`  
 `Petra`  
 
 ----------------------------------------------
-**PUNTO 3.2**  
+**PUNTO 3.2**❎  
 _Consultar la velocidad de RochaMcQueen luego de incrementar su velocidad._  
-`incrementarVelocidad rocha`  
-`velocidad rocha`  
+`velocidad (incrementarVelocidad rocha)`  
 `15`  
 
 _Consultar la velocidad de Biankerr luego de incrementar su velocidad._  
-`incrementarVelocidad biankerr`  
-`velocidad biankerr`  
+`velocidad (incrementarVelocidad biankerr)`  
 `35`  
 
 _Consultar la velocidad de Gushtav luego de incrementar su velocidad._  
-`incrementarVelocidad gushtav`  
-`velocidad gushtav`  
+`velocidad (incrementarVelocidad gushtav)`   
 `160`  
 
 _Consultar la velocidad de Rodra luego de incrementar su velocidad._  
-`incrementarVelocidad rodra`  
-`velocidad rodra`  
+`velocidad (incrementarVelocidad rodra)`  
 `70`  
 
 ----------------------------------------------
-**PUNTO 3.3**
+**PUNTO 3.3** ✅
 _Consultar si RochaMcQueen puede usar su truco._  
 `puedeUsarTruco rochaMcQueen`  
-`Verdadero`  
+`True`  
 
 _Consultar si Gushtav puede usar su truco._  
 `puedeUsarTruco gushtav`  
-`Falso`  
+`False`  
 
 _Consultar si Rodra puede usar su truco._  
 `puedeUsarTruco rodra`  
-`Falso`  
+`False`  
 
 ----------------------------------------------
 **PUNTO 3.4**  
-_Consultar la nafta de Rocha luego de realizar comboLoco._  
-`comboLoco rocha`  
-`nivelDeNafta rocha`  
+_Consultar la nafta de Rocha luego de realizar comboLoco._✅  
+`nivelDeNafta (comboLoco rochaMcQueen)`  
 `500`  
 
-_Consultar la velocidad de Rocha luego de realizar comboLoco._  
-`comboLoco rocha`  
-`velocidad rocha`  
+_Consultar la velocidad de Rocha luego de realizar comboLoco._✅  
+`velocidad (comboLoco rochaMcQueen)`  
 `15`  
 
-_Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamorada a Murcielago._  
-`queTrucazo rodra Murcielago`  
-`velocidad rodra`  
+_Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamorada a Murcielago._❎  
+`velocidad (queTrucazo rodra Murcielago)`  
 `80`  
 
-_Consultar la velocidad de Gushtav luego de utilizar turbo._  
-`turbo gushtav`  
-`velocidad gushtav`  
+_Consultar la velocidad de Gushtav luego de utilizar turbo._❎  
+`velocidad (turbo gushtav)`  
 `2130`  
 
-_Consultar la nafta de Gushtav luego de utilizar turbo._  
-`turbo gushtav`  
-`nafta gushtav`  
+_Consultar la nafta de Gushtav luego de utilizar turbo._❎  
+`nivelDeNafta (turbo gushtav)`  
 `0`  
 
-_Consultar la velocidad de Rodra luego de utilizar turbo._  
-`turbo rodra`  
-`velocidad rodra`  
+_Consultar la velocidad de Rodra luego de utilizar turbo._❎  
+`velocidad (turbo rodra)`  
 `50`  
 
-_Consultar la nafta de Rodra luego de utilizar turbo._  
-`turbo rodra`  
-`nafta rodra`  
+_Consultar la nafta de Rodra luego de utilizar turbo._❎  
+`nivelDeNafta (turbo rodra)`  
 `0`  
