@@ -6,7 +6,7 @@ data Participante = Participante {
                                   nombre :: String, 
                                   nivelDeNafta :: Int, 
                                   velocidad :: Int, 
-                                  enamorade :: String}
+                                  enamorade :: String,}
                                   truco :: String}
                                   deriving (Show)
                                   
