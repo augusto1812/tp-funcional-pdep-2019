@@ -57,6 +57,12 @@ incrementarVelocidad (Participante _ _ velocidad enamorade _ ) =
 puedeRealizarTruco :: Participante -> Bool
 puedeRealizarTruco (uneParticipante _ nafta velocidad _ _) = (nafa != 0) && (velocidad < 100) 
 
+cambiarEnamorada :: Participante -> Participante
+cambiarEnamorada (Participante _ _ _ enamorade _ ) = fingirAmor
+
+queTrucazo :: Participante -> Participante
+queTrucazo (Participante _ _ velocidad enamorade _) = (incrementarVelocidad) . (cambiarEnamorada)
+
 -- PUNTO 4
 -- Nuevos trucos
 comboLoco :: Participante -> Participante
