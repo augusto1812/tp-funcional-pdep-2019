@@ -67,7 +67,7 @@ _Consultar la velocidad de Gushtav luego de utilizar turbo._  ✅
 `velocidad (turbo gushtav)`  
 `2130`  
 
-_Consultar la nafta de Gushtav luego de utilizar turbo._ ✅ 
+_Consultar la nafta de Gushtav luego de utilizar turbo._  ✅ 
 `nivelDeNafta (turbo gushtav)`  
 `0`  
 
