@@ -63,11 +63,11 @@ _Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamo
 `velocidad (queTrucazo rodra Murcielago)`  
 `80`  
 
-_Consultar la velocidad de Gushtav luego de utilizar turbo._ ✅
+_Consultar la velocidad de Gushtav luego de utilizar turbo._ ✅  
 `velocidad (turbo gushtav)`  
 `2130`  
 
-_Consultar la nafta de Gushtav luego de utilizar turbo._ ✅ 
+_Consultar la nafta de Gushtav luego de utilizar turbo._ ✅   
 `nivelDeNafta (turbo gushtav)`  
 `0`  
 
