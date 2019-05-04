@@ -71,7 +71,7 @@ _Consultar la nafta de Gushtav luego de utilizar turbo._ ✅
 `nivelDeNafta (turbo gushtav)`  
 `0`  
 
-_Consultar la velocidad de Rodra luego de utilizar turbo._ ✅ 
+_Consultar la velocidad de Rodra luego de utilizar turbo._ ✅   
 `velocidad (turbo rodra)`  
 `50`  
 
