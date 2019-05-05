@@ -50,31 +50,31 @@ _Consultar si Rodra puede usar su truco._
 `False`  
 
 ----------------------------------------------
-**PUNTO 3.4**  
-_Consultar la nafta de Rocha luego de realizar comboLoco._ ✅  
+**PUNTO 3.4** ✅  
+_Consultar la nafta de Rocha luego de realizar comboLoco._  
 `nivelDeNafta (comboLoco rochaMcQueen)`  
 `500`  
 
-_Consultar la velocidad de Rocha luego de realizar comboLoco._ ✅  
+_Consultar la velocidad de Rocha luego de realizar comboLoco._  
 `velocidad (comboLoco rochaMcQueen)`  
 `15`  
 
-_Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamorada a Murcielago._ ✅  
+_Consultar la velocidad de Rodra luego de utilizar queTrucazo cambiando su enamorada a Murcielago._  
 `velocidad (queTrucazo rodra Murcielago)`  
 `80`  
 
-_Consultar la velocidad de Gushtav luego de utilizar turbo._ ✅  
+_Consultar la velocidad de Gushtav luego de utilizar turbo._  
 `velocidad (turbo gushtav)`  
 `2130`  
 
-_Consultar la nafta de Gushtav luego de utilizar turbo._ ✅   
+_Consultar la nafta de Gushtav luego de utilizar turbo._    
 `nivelDeNafta (turbo gushtav)`  
 `0`  
 
-_Consultar la velocidad de Rodra luego de utilizar turbo._ ✅   
+_Consultar la velocidad de Rodra luego de utilizar turbo._     
 `velocidad (turbo rodra)`  
 `50`  
 
-_Consultar la nafta de Rodra luego de utilizar turbo._ ✅  
+_Consultar la nafta de Rodra luego de utilizar turbo._  
 `nivelDeNafta (turbo rodra)`  
 `0`  
