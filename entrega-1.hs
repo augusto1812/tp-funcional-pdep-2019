@@ -1,7 +1,6 @@
 import Text.Show.Functions
 
 -- PUNTO 1.1
--- Tipo de dato Auto
 data Participante = Participante { 
                                   nombre :: String, 
                                   nivelDeNafta :: Int, 
@@ -44,12 +43,9 @@ rodra = Participante {
 }
 
 -- PUNTO 1.2
--- Trucos
 deReversa :: Participante -> Participante
 deReversa uneParticipante = 
     uneParticipante  {nivelDeNafta = ((+200).nivelDeNafta) uneParticipante}
--- Con la pista de 1000m, la función aumenta siempre 200 (1000/5) y sería
--- deReversa = (+200)
 
 impresionar :: Participante -> Participante
 impresionar uneParticipante = 
@@ -62,6 +58,10 @@ nitro uneParticipante =
 fingirAmor :: String -> Participante -> Participante 
 fingirAmor nueveEnamorade uneParticipante = 
     uneParticipante {enamorade = nueveEnamorade}
+
+hazLoTuyo :: Participante -> Participante
+hazLoTuyo uneParticipante =
+    (truco uneParticipante) $ uneParticipante  
 
 -- PUNTO 2
 esVocal :: Char -> Bool
@@ -87,7 +87,6 @@ puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) =
     (nivelDeNafta /= 0) && (velocidad < 100)
 
 -- PUNTO 4
--- Nuevos trucos
 comboLoco :: Participante -> Participante
 comboLoco = deReversa.nitro 
 
@@ -97,4 +96,5 @@ queTrucazo nueveEnamorade =
 
 turbo :: Participante -> Participante
 turbo uneParticipante =
-    uneParticipante {velocidad = velocidad uneParticipante + ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
+    uneParticipante {velocidad = ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
+    
