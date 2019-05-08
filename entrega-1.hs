@@ -96,5 +96,5 @@ queTrucazo nueveEnamorade =
 
 turbo :: Participante -> Participante
 turbo uneParticipante =
-    uneParticipante {velocidad = ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
+    uneParticipante {velocidad = velocidad uneParticipante + ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
     
