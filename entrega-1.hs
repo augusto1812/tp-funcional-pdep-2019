@@ -64,13 +64,15 @@ hazLoTuyo uneParticipante =
     (truco uneParticipante) $ uneParticipante  
 
 -- PUNTO 2
+vocales = "aeiou"
+
 esVocal :: Char -> Bool
 esVocal letra = 
-    ((letra == 'a') || (letra =='e') || (letra =='i') || (letra =='o') || (letra =='u'))
+    any (==letra) vocales
 
 obtenerVocales :: Participante -> [Char]
 obtenerVocales (Participante _ _ _ enamorade _) = 
-    filter (esVocal) enamorade
+    filter esVocal enamorade
 
 cantidadDeVocalesDeEnamorade :: Participante -> Int
 cantidadDeVocalesDeEnamorade  = length . obtenerVocales
@@ -96,5 +98,5 @@ queTrucazo nueveEnamorade =
 
 turbo :: Participante -> Participante
 turbo uneParticipante =
-    uneParticipante {velocidad = ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
+    uneParticipante {velocidad = velocidad uneParticipante + ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
     
