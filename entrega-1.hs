@@ -44,16 +44,14 @@ rodra = Participante {
 
 -- PUNTO 1.2
 deReversa :: Participante -> Participante
-deReversa uneParticipante = 
-    uneParticipante  {nivelDeNafta = ((+200).nivelDeNafta) uneParticipante}
+deReversa (Participante nombre nivelDeNafta velocidad enamorade truco) = 
+    Participante nombre (nivelDeNafta+200) velocidad enamorade truco
 
 impresionar :: Participante -> Participante
-impresionar uneParticipante = 
-    uneParticipante {velocidad = ((*2).velocidad) uneParticipante}
+impresionar = modificarVelocidad (*2)
 
 nitro :: Participante -> Participante
-nitro uneParticipante = 
-    uneParticipante {velocidad = ((+15).velocidad) uneParticipante}
+nitro = modificarVelocidad (+15)
 
 fingirAmor :: String -> Participante -> Participante 
 fingirAmor nueveEnamorade uneParticipante = 
@@ -64,7 +62,7 @@ hazLoTuyo uneParticipante =
     (truco uneParticipante) $ uneParticipante  
 
 -- PUNTO 2
-vocales = "aeiou"
+vocales = "aeiouAEIOU"
 
 esVocal :: Char -> Bool
 esVocal letra = 
@@ -79,9 +77,9 @@ cantidadDeVocalesDeEnamorade  = length . obtenerVocales
 
 incrementarVelocidad :: Participante -> Participante
 incrementarVelocidad uneParticipante
-    | (cantidadDeVocalesDeEnamorade uneParticipante == 1) || (cantidadDeVocalesDeEnamorade uneParticipante == 2) = uneParticipante {velocidad = ((+15).velocidad) uneParticipante}
-    | (cantidadDeVocalesDeEnamorade uneParticipante == 3) || (cantidadDeVocalesDeEnamorade uneParticipante == 4) = uneParticipante {velocidad = ((+20).velocidad) uneParticipante}
-    | (cantidadDeVocalesDeEnamorade uneParticipante > 4) = uneParticipante {velocidad = ((+30).velocidad) uneParticipante}
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 1) || (cantidadDeVocalesDeEnamorade uneParticipante == 2) = modificarVelocidad (+15) uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 3) || (cantidadDeVocalesDeEnamorade uneParticipante == 4) = modificarVelocidad (+20) uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante > 4) = modificarVelocidad (+30) uneParticipante
   
 -- PUNTO 3
 puedeRealizarTruco :: Participante -> Bool
@@ -90,13 +88,21 @@ puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) =
 
 -- PUNTO 4
 comboLoco :: Participante -> Participante
-comboLoco = deReversa.nitro 
+comboLoco = deReversa . nitro 
 
 queTrucazo :: String -> Participante -> Participante
 queTrucazo nueveEnamorade = 
-  incrementarVelocidad.(fingirAmor nueveEnamorade)
+  incrementarVelocidad . (fingirAmor nueveEnamorade)
 
 turbo :: Participante -> Participante
-turbo uneParticipante =
-    uneParticipante {velocidad = velocidad uneParticipante + ((*10).nivelDeNafta) uneParticipante, nivelDeNafta = 0}
+turbo = terminarNafta . modificarVelocidad (*10)
     
+-- AUXILIARES
+
+modificarVelocidad :: (Int -> Int) -> Participante -> Participante
+modificarVelocidad func (Participante nombre nivelDeNafta velocidad enamorade truco) =
+    Participante nombre nivelDeNafta (func velocidad) enamorade truco
+
+terminarNafta :: Participante -> Participante
+terminarNafta (Participante nombre nivelDeNafta velocidad enamorade truco) =
+    Participante nombre 0 velocidad enamorade truco
