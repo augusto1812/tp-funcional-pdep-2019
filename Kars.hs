@@ -67,3 +67,12 @@ neutralizarTrucos (Carrera cantidadVueltas longitudDePista publico trampa partic
 modificarTruco :: (Participante -> Participante) -> Participante -> Participante
 modificarTruco nuevoTruco (Participante nombre nivelDeNafta velocidad enamorade truco) =
     Participante nombre nivelDeNafta velocidad enamorade nuevoTruco
+
+pocaReserva :: Carrera -> Carrera 
+pocaReserva (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
+    Carrera cantidadVueltas longitudDePista publico trampa (sacarParticipantesConNafta (<30) participantes)
+
+sacarParticipantesConNafta :: Int -> [Participante] -> [Participante]
+sacarParticipantesConNafta minNafta participantes =
+    filter (minNafta.nivelDeNafta) participantes
+
