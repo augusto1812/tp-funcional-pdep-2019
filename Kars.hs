@@ -49,7 +49,7 @@ potreroFunes = Carrera {
 ---------------------------------------------------
 
 deReversa :: Participante -> Participante
-deReversa (Participante nombre nivelDeNafta velocidad enamorade truco ) = 
+deReversa (Participante nombre nivelDeNafta velocidad enamorade truco) = 
  	Participante nombre (nivelDeNafta + div velocidad 5) velocidad enamorade truco
 
 ---------------------------------------------------
@@ -59,3 +59,11 @@ deReversa (Participante nombre nivelDeNafta velocidad enamorade truco ) =
 podio :: Carrera -> Carrera
 podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
     Carrera cantidadVueltas longitudDePista publico trampa (take 3 participantes)
+
+neutralizarTrucos :: Carrera -> Carrera
+neutralizarTrucos (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
+    Carrera cantidadVueltas longitudDePista publico trampa (map (modificarTruco inutilidad) participantes)
+
+modificarTruco :: (Participante -> Participante) -> Participante -> Participante
+modificarTruco nuevoTruco (Participante nombre nivelDeNafta velocidad enamorade truco) =
+    Participante nombre nivelDeNafta velocidad enamorade nuevoTruco
