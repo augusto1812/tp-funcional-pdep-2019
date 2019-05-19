@@ -139,9 +139,9 @@ podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
 ----------------------- 3.3 -----------------------
 ---------------------------------------------------
 
--- darVuelta :: Carrera -> Carrera
--- darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
---     Carrera cantidadVueltas longitudDePista publico trampa ((sufrirPorParticipante trampa).(realizarTrucoSiHay publico).(restarCombustibleSegun longitudDePista) participantes)
+--darVuelta :: Carrera -> Carrera
+--darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
+--  Carrera cantidadVueltas longitudDePista publico trampa ((sufrirPorParticipante trampa).(realizarTrucoSiHay publico).(restarCombustibleSegun longitudDePista) participantes)
 
 -- restarCombustibleSegun :: Int -> [Participante] -> [Participante]
 -- restarCombustibleSegun kms [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
@@ -155,3 +155,17 @@ podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
 -- correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes)
 --     | cantidadVueltas == 0 = (Carrera cantidadVueltas longitudDePista publico trampa participantes)
 --     | otherwise = darVuelta (Carrera cantidadVueltas-1 longitudDePista publico trampa participantes)
+
+---------------------------------------------------
+----------------------- 3.4 -----------------------
+---------------------------------------------------
+
+--quienGana :: Carrera -> Participante
+--quienGana (Carrera cantidadVueltas longitudDePista publico trampa participantes) = 
+--    (max velociad) participante.correrCarrera
+
+---------------------------------------------------
+----------------------- 3.5 -----------------------
+---------------------------------------------------
+--elGranTruco :: [Participante -> Participante] -> Participante -> Participante
+--elGranTruco trucos (Participante nombre nivelDeNafta velocidad enamorade truco) =
