@@ -20,27 +20,27 @@ main = hspec $ do
         describe "Punto 3.0" $ do
 
             it "La nafta de rochaMcQueen luego de hacer su truco favorito" $ do
-            (nivelDeNafta . truco rochaMcQueen) rochaMcQueen `shouldBe` 300
+            (nivelDeNafta . truco rochaMcQueen) rochaMcQueen `shouldBe` 340
 
             it "Nafta de rodra tras deReversa" $ do
-            nivelDeNafta . deReversa rodra `shouldBe` 10
+            nivelDeNafta (deReversa rodra) `shouldBe` 10
   
         describe "Punto 3.2" $ do
 
             it "Cantidad de participantes luego de sacarAlPistero en potreroFunes" $ do 
-                ... `shouldBe` 3
+                length (participantes (sacarAlPistero potreroFunes)) `shouldBe` 3
 
             it "RochaMcQueen ya no participa en potreroFunes tras sacarAlPistero" $ do
                 ... `shouldBe` True
   
             it "Cantidad de participantes luego de pocaReserva en potreroFunes" $ do
-                ... `shouldBe` 3
+                length (participantes (pocaReserva potreroFunes)) `shouldBe` 3
 
             it "Rodra no está entre los participantes de potreroFunes luego de aplicar pocaReserva" $ do
                 ... `shouldBe` False
 
             it "Cantidad de participantes luego de aplicar podio en potreroFunes" $ do
-                ... `shouldBe` 3
+                length (participantes (podio potreroFunes)) `shouldBe` 3
             
             it "Velocidad del último participante de potreroFunes (rodra) luego de la lluvia" $ do
                 ... `shouldBe` 40
