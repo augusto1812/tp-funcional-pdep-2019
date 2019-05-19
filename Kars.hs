@@ -56,3 +56,6 @@ deReversa (Participante nombre nivelDeNafta velocidad enamorade truco ) =
 ----------------------- 3.2 -----------------------
 ---------------------------------------------------
 
+podio :: Carrera -> Carrera
+podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
+    Carrera cantidadVueltas longitudDePista publico trampa (take 3 participantes)
