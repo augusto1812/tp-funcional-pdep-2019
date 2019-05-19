@@ -139,33 +139,49 @@ podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
 ----------------------- 3.3 -----------------------
 ---------------------------------------------------
 
---darVuelta :: Carrera -> Carrera
---darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
---  Carrera cantidadVueltas longitudDePista publico trampa ((sufrirPorParticipante trampa).(realizarTrucoSiHay publico).(restarCombustibleSegun longitudDePista) participantes)
+darVuelta :: Carrera -> Carrera
+darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
+  Carrera cantidadVueltas longitudDePista publico trampa ((sufrirPorParticipante trampa).(realizarTrucoSiHay publico).(restarCombustibleSegun longitudDePista) participantes)
 
--- restarCombustibleSegun :: Int -> [Participante] -> [Participante]
--- restarCombustibleSegun kms [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
---     map (-kms/10*velocidad) [Participante nombre nivelDeNafta velocidad enamorade truco]
+ restarCombustibleSegun :: Int -> [Participante] -> [Participante]
+ restarCombustibleSegun kms [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
+     map (-kms/10*velocidad) [(Participante nombre nivelDeNafta velocidad enamorade truco)]
 
--- realizarTrucoSiHay :: [Enamorade] ->  [Participante] -> [Participante]
--- realizarTrucoSiHay publico [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
---     map puedeRealizarTruco 
+ realizarTrucoSiHay :: [Enamorade] ->  [Participante] -> [Participante]
+ realizarTrucoSiHay publico [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
+     map puedeRealizarTruco 
 
--- correrCarrera :: Carrera -> Carrera
--- correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes)
---     | cantidadVueltas == 0 = (Carrera cantidadVueltas longitudDePista publico trampa participantes)
---     | otherwise = darVuelta (Carrera cantidadVueltas-1 longitudDePista publico trampa participantes)
+ puedeRealizarTruco :: [Enamorade] -> Participante -> Participante
+ puedeRealizarTruco publico (Participante nombre nivelDeNafta velocidad enamorade truco) = (Participante nombre nivelDeNafta velocidad (enamorade) truco)
+  
+--sufrirPorParticipante :: (Carrera -> Carrera) -> [Participante] -> [Participante] 
+--sufrirPorParticipante trampaPista (Participante nombre nivelDeNafta velocidad enamorade truco)=(Participante nombre nivelDeNafta velocidad enamorade truco (trampaPista . trampa)) 
+-- en este abria que ver si se puede agregar un campo al participante que sea trampa para poder hacerlo
+ correrCarrera :: Carrera -> Carrera
+ correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes)
+     | cantidadVueltas == 0 = (Carrera cantidadVueltas longitudDePista publico trampa participantes)
+     | otherwise = darVuelta (Carrera cantidadVueltas-1 longitudDePista publico trampa participantes)
 
 ---------------------------------------------------
 ----------------------- 3.4 -----------------------
 ---------------------------------------------------
 
---quienGana :: Carrera -> Participante
---quienGana (Carrera cantidadVueltas longitudDePista publico trampa participantes) = 
---    (max velociad) participante.correrCarrera
+ quienGana :: Carrera -> Participante
+ quienGana = corredorConMayorVelocidad.correrCarrera
+ 
+corredorConMayorVelocidad :: (Carrera ->[Participante]) -> Participante
+corredorConMayorVelocidad corredores = filter ((=) . velocidadMaxima) corredores
+
+velocidadMaxima :: (Carrera ->[Participante]) -> Int
+velocidadMaxima corredores = maximum velocidad corredores   
+
+corredores :: Carrera -> [Participante]
+corredores (Carrera _ _ _ _ participantes) = participantes
+
+ 
 
 ---------------------------------------------------
 ----------------------- 3.5 -----------------------
 ---------------------------------------------------
---elGranTruco :: [Participante -> Participante] -> Participante -> Participante
---elGranTruco trucos (Participante nombre nivelDeNafta velocidad enamorade truco) =
+elGranTruco :: [Participante -> Participante] -> Participante -> Participante
+elGranTruco trucos (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante
