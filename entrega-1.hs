@@ -83,8 +83,12 @@ incrementarVelocidad uneParticipante
   
 -- PUNTO 3
 puedeRealizarTruco :: Participante -> Bool
-puedeRealizarTruco (Participante _ nivelDeNafta velocidad _ _) = 
-    (nivelDeNafta /= 0) && (velocidad < 100)
+puedeRealizarTruco uneParticipante = 
+    ((&& (velocidad uneParticipante < 100)) . tieneNafta) uneParticipante
+
+tieneNafta :: Participante -> Bool
+tieneNafta (Participante _ nivelDeNafta _ _ _) =
+    nivelDeNafta /= 0
 
 -- PUNTO 4
 comboLoco :: Participante -> Participante
