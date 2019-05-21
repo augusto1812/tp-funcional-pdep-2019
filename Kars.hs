@@ -1,13 +1,13 @@
-import Text.Show.Functions
-
 --module Kars where
+
+import Text.Show.Functions
 
 data Participante = 
     Participante { 
         nombre :: String, 
         nivelDeNafta :: Int, 
         velocidad :: Int, 
-        enamorade :: Enamorade,
+        enamorade :: String,
         truco :: (Participante -> Participante)
     } deriving (Show)
 
@@ -15,12 +15,10 @@ data Carrera =
     Carrera {
         cantidadVueltas :: Int,
         longitudDePista :: Int,
-        publico :: [Enamorade],
+        publico :: [String],
         trampa :: (Carrera -> Carrera),
         participantes :: [Participante]
     } deriving (Show)
-
-data Enamorade = Ronco | Tinch | PetiLaLinda | Taisa | Dodain deriving (Show, Eq)
     
 ---------------------------------------------------
 ---------------------- AUTOS ----------------------
@@ -29,8 +27,8 @@ data Enamorade = Ronco | Tinch | PetiLaLinda | Taisa | Dodain deriving (Show, Eq
 rochaMcQueen  = Participante { 
     nombre = "Rocha McQueen",
     nivelDeNafta = 300,
-    velocidad = 200,
-    enamorade = Ronco,
+    velocidad = 0,
+    enamorade = "Ronco",
     truco = deReversa 
 }
 
@@ -38,7 +36,7 @@ biankerr = Participante {
     nombre = "Biankerr", 
     nivelDeNafta = 500, 
     velocidad = 20,  
-    enamorade = Tinch,
+    enamorade = "Tinch",
     truco = impresionar 
 }
 
@@ -46,7 +44,7 @@ gushtav = Participante {
     nombre = "Gushtav", 
     nivelDeNafta = 200, 
     velocidad = 130, 
-    enamorade = PetiLaLinda,
+    enamorade = "PetiLaLinda",
     truco = nitro 
 }
 
@@ -54,8 +52,8 @@ rodra = Participante {
     nombre = "Rodra", 
     nivelDeNafta = 0, 
     velocidad = 50, 
-    enamorade = Taisa,
-    truco = fingirAmor (PetiLaLinda)
+    enamorade = "Taisa",
+    truco = fingirAmor ("PetiLaLinda")
 }
 
 ---------------------------------------------------
@@ -65,14 +63,19 @@ rodra = Participante {
 potreroFunes = Carrera {
     cantidadVueltas = 3,
     longitudDePista = 5,
-    publico = [Ronco, Tinch, Dodain],
+    publico = ["Ronco", "Tinch", "Dodain"],
     trampa = sacarAlPistero,
     participantes = [rochaMcQueen, biankerr, gushtav, rodra]
 }
 
 ---------------------------------------------------
---------------------- DEL TP1 ---------------------
+----------------------- TP1 -----------------------
+----------------------- 1.2 -----------------------
 ---------------------------------------------------
+
+-- deReversa :: Participante -> Participante
+-- deReversa (Participante nombre nivelDeNafta velocidad enamorade truco) = 
+--     Participante nombre (nivelDeNafta+200) velocidad enamorade truco
 
 impresionar :: Participante -> Participante
 impresionar = modificarVelocidad (*2)
@@ -80,15 +83,78 @@ impresionar = modificarVelocidad (*2)
 nitro :: Participante -> Participante
 nitro = modificarVelocidad (+15)
 
-fingirAmor :: Enamorade -> Participante -> Participante 
+fingirAmor :: String -> Participante -> Participante 
 fingirAmor nueveEnamorade (Participante nombre nivelDeNafta velocidad enamorade truco) = 
     Participante nombre nivelDeNafta velocidad nueveEnamorade truco
+
+---------------------------------------------------
+----------------------- TP1 -----------------------
+------------------------ 2 ------------------------
+---------------------------------------------------
+
+vocales = "aeiouAEIOU"
+
+esVocal :: Char -> Bool
+esVocal letra = 
+    any (==letra) vocales
+
+obtenerVocales :: Participante -> [Char]
+obtenerVocales (Participante _ _ _ enamorade _) = 
+    filter esVocal enamorade
+
+cantidadDeVocalesDeEnamorade :: Participante -> Int
+cantidadDeVocalesDeEnamorade  = length . obtenerVocales
+
+incrementarVelocidad :: Participante -> Participante
+incrementarVelocidad uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 1) || (cantidadDeVocalesDeEnamorade uneParticipante == 2) = modificarVelocidad (+15) uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante == 3) || (cantidadDeVocalesDeEnamorade uneParticipante == 4) = modificarVelocidad (+20) uneParticipante
+    | (cantidadDeVocalesDeEnamorade uneParticipante > 4) = modificarVelocidad (+30) uneParticipante
+
+---------------------------------------------------
+----------------------- TP1 -----------------------
+------------------------ 3 ------------------------
+---------------------------------------------------
+
+puedeRealizarTruco :: Participante -> Bool
+puedeRealizarTruco uneParticipante = 
+    ((&& (velocidad uneParticipante < 100)) . tieneNafta) uneParticipante
+
+tieneNafta :: Participante -> Bool
+tieneNafta (Participante _ nivelDeNafta _ _ _) =
+    nivelDeNafta /= 0
+
+---------------------------------------------------
+----------------------- TP1 -----------------------
+------------------------ 4 ------------------------
+---------------------------------------------------
+
+comboLoco :: Participante -> Participante
+comboLoco = deReversa . nitro 
+
+queTrucazo :: String -> Participante -> Participante
+queTrucazo nueveEnamorade = 
+  incrementarVelocidad . (fingirAmor nueveEnamorade)
+
+turbo :: Participante -> Participante
+turbo = terminarNafta . modificarVelocidad (*10)
+    
+---------------------------------------------------
+----------------------- TP1 -----------------------
+----------------------- AUX -----------------------
+---------------------------------------------------
 
 modificarVelocidad :: (Int -> Int) -> Participante -> Participante
 modificarVelocidad func (Participante nombre nivelDeNafta velocidad enamorade truco) =
     Participante nombre nivelDeNafta (func velocidad) enamorade truco
 
+terminarNafta :: Participante -> Participante
+terminarNafta (Participante nombre nivelDeNafta velocidad enamorade truco) =
+    Participante nombre 0 velocidad enamorade truco
+
+
 ---------------------------------------------------
+----------------------- TP2 -----------------------
 ----------------------- 3.0 -----------------------
 ---------------------------------------------------
 
@@ -97,6 +163,7 @@ deReversa (Participante nombre nivelDeNafta velocidad enamorade truco) =
     Participante nombre (nivelDeNafta + div velocidad 5) velocidad enamorade truco
 
 ---------------------------------------------------
+----------------------- TP2 -----------------------
 ----------------------- 3.2 -----------------------
 ---------------------------------------------------
 
@@ -136,6 +203,7 @@ podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
     Carrera cantidadVueltas longitudDePista publico trampa (take 3 participantes)
 
 ---------------------------------------------------
+----------------------- TP2 -----------------------
 ----------------------- 3.3 -----------------------
 ---------------------------------------------------
 
@@ -147,6 +215,7 @@ darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes)
 restarCombustibleDeLosParticipantes :: Int -> [Participante] -> [Participante]
 restarCombustibleDeLosParticipantes kms lista =
  map (resComDeUnParticipante kms ) lista
+ 
 resComDeUnParticipante :: Int -> Participante -> Participante
 resComDeUnParticipante kms (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante nombre (nivelDeNafta -((div kms 10 )* velocidad)) velocidad enamorade truco
 
@@ -168,6 +237,7 @@ correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participan
      | otherwise = darVuelta (Carrera cantidadVueltas-1 longitudDePista publico trampa participantes)
 --}
 ---------------------------------------------------
+----------------------- TP2 -----------------------
 ----------------------- 3.4 -----------------------
 ---------------------------------------------------
 
@@ -186,6 +256,7 @@ corredores (Carrera _ _ _ _ participantes) = participantes
  
 
 ---------------------------------------------------
+----------------------- TP2 -----------------------
 ----------------------- 3.5 -----------------------
 ---------------------------------------------------
 {--elGranTruco :: [Participante -> Participante] -> Participante -> Participante

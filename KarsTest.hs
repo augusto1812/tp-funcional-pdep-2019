@@ -11,7 +11,7 @@ main = hspec $ do
         describe "Punto 3.0" $ do
 
             it "La nafta de rochaMcQueen luego de hacer su truco favorito." $ do
-                (nivelDeNafta . truco rochaMcQueen) rochaMcQueen `shouldBe` 340
+                (nivelDeNafta . truco rochaMcQueen) rochaMcQueen `shouldBe` 300
 
             it "Nafta de rodra tras deReversa." $ do
                 nivelDeNafta (deReversa rodra) `shouldBe` 10
