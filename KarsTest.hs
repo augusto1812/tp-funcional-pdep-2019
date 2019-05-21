@@ -57,10 +57,10 @@ main = hspec $ do
         --     it "Ganador de potreroFunes." $ do
         --         ... `shouldBe` rodra
   
-        -- describe "Punto 3.5" $ do
+        describe "Punto 3.5" $ do
 
-        --     it "Velocidad de rodra tras realizar elGranTruco con nitro, deReversa e impresionar." $ do
-        --         ... `shouldBe` 130
+            it "Velocidad de rodra tras realizar elGranTruco con nitro, deReversa e impresionar." $ do
+                velocidad (elGranTruco [nitro, deReversa, impresionar] rodra) `shouldBe` 130
     
-        --     it "Nivel de nafta de rodra tras realizar elGranTruco con nitro, deReversa e impresionar." $ do
-        --         ... `shouldBe` 13
+            it "Nivel de nafta de rodra tras realizar elGranTruco con nitro, deReversa e impresionar." $ do
+                nivelDeNafta (elGranTruco [nitro, deReversa, impresionar] rodra) `shouldBe` 13

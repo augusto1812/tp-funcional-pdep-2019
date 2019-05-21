@@ -259,5 +259,23 @@ corredores (Carrera _ _ _ _ participantes) = participantes
 ----------------------- TP2 -----------------------
 ----------------------- 3.5 -----------------------
 ---------------------------------------------------
-{--elGranTruco :: [Participante -> Participante] -> Participante -> Participante
-elGranTruco trucos (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante--}
+
+elGranTruco :: [(Participante -> Participante)] -> Participante -> Participante
+elGranTruco trucos uneParticipante =
+    foldl1 (.) (reverse trucos) uneParticipante
+
+---------------------------------------------------
+----------------------- TP2 -----------------------
+----------------------- 3.6 -----------------------
+---------------------------------------------------
+
+-- Tenemos la carrera ultra suprema de las altas ligas que tiene una cantidad infinita de participantes:
+-- A) ¿Podemos correrla? 
+-- B) ¿Podemos conocer el primer participante luego de 2 vueltas? 
+-- C) ¿Podemos dar la primera vuelta de la carrera? 
+
+-- A)
+
+-- B)
+
+-- C)
