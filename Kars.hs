@@ -269,13 +269,13 @@ elGranTruco trucos uneParticipante =
 ----------------------- 3.6 -----------------------
 ---------------------------------------------------
 
--- Tenemos la carrera ultra suprema de las altas ligas que tiene una cantidad infinita de participantes:
--- A) ¿Podemos correrla? 
+-- Para carrera con cantidad infinita de participantes:
+
+-- A) ¿Podemos correrla?
+-- Se puede correr pero no va a converger ya que siempre va a estar pidiendo un nuevo participante al cual realizarle la primera de las operaciones que solicita darVuelta. Por este motivo, en un momento dado se llenará la memoria y nos dará error.
+
 -- B) ¿Podemos conocer el primer participante luego de 2 vueltas? 
+-- No porque no se llega a dar dos vueltas. Sin embargo, se podría conocer el primer participante de la primera sin problemas.
+
 -- C) ¿Podemos dar la primera vuelta de la carrera? 
-
--- A)
-
--- B)
-
--- C)
+-- No se puede llegar a concluir la primera vuelta de la carrera por lo explicado en el punto A.
