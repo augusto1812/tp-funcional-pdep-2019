@@ -36,26 +36,26 @@ main = hspec $ do
             it "Velocidad del último participante de potreroFunes (rodra) luego de la lluvia." $ do
                 velocidad (last (participantes(lluvia potreroFunes))) `shouldBe` 40
 
-        -- describe "Punto 3.3" $ do
-        --     it "Nivel de nafta del primer participante (biankerr)  luego de dar una vuelta en potreroFunes." $ do
-        --         ... `shouldBe` 490
+        describe "Punto 3.3" $ do
+            it "Nivel de nafta del primer participante (biankerr) luego de dar una vuelta en potreroFunes." $ do
+                nivelDeNafta (head (participantes (darVuelta potreroFunes))) `shouldBe` 490
             
-        --     it "Velocidad del primer participante (biankerr) luego de dar una vuelta en potreroFunes." $ do
-        --         ... `shouldBe` 40
+            it "Velocidad del primer participante (biankerr) luego de dar una vuelta en potreroFunes." $ do
+                velocidad (head (participantes (darVuelta potreroFunes))) `shouldBe` 40
             
-        --     it "Cantidad de participantes tras dar dos vueltas en potreroFunes." $ do
-        --         ... `shouldBe` 2
+            it "Cantidad de participantes tras dar dos vueltas en potreroFunes." $ do
+                length (participantes ((darVuelta.darVuelta) potreroFunes))) `shouldBe` 2
             
-        --     it "Consultar el nivelDeNafta del primer participante (gushtav) luego de dos vueltas en potreroFunes." $ do
-        --         ... `shouldBe` 70
+            it "Consultar el nivelDeNafta del primer participante (gushtav) luego de dos vueltas en potreroFunes." $ do
+                nivelDeNafta (head (participantes (darVuelta.darVuelta potreroFunes))) `shouldBe` 70
 
-        --     it "Rodra debe ser el único participante luego de correr la carrera de potreroFunes." $ do
-        --         ... `shouldBe` rodra
+            it "Rodra debe ser el único participante luego de correr la carrera de potreroFunes." $ do
+                head (participantes (correrCarrera potreroFunes)) `shouldBe` rodra
 
-        -- describe "Punto 3.4" $ do
+        describe "Punto 3.4" $ do
 
-        --     it "Ganador de potreroFunes." $ do
-        --         ... `shouldBe` rodra
+            it "Ganador de potreroFunes." $ do
+                quienGana potreroFunes `shouldBe` rodra
   
         describe "Punto 3.5" $ do
 
