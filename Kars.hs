@@ -1,6 +1,7 @@
---module Kars where
+module Kars where
 
 import Text.Show.Functions
+import Data.List
 
 data Participante = 
     Participante { 
@@ -16,7 +17,7 @@ data Carrera =
         cantidadVueltas :: Int,
         longitudDePista :: Int,
         publico :: [String],
-        trampa :: (Carrera -> Carrera),
+        trampa :: ([Participante] -> [Participante]),
         participantes :: [Participante]
     } deriving (Show)
     
@@ -55,6 +56,7 @@ rodra = Participante {
     enamorade = "Taisa",
     truco = fingirAmor ("PetiLaLinda")
 }
+
 
 ---------------------------------------------------
 --------------------- CARRERA ---------------------
@@ -167,19 +169,16 @@ deReversa (Participante nombre nivelDeNafta velocidad enamorade truco) =
 ----------------------- 3.2 -----------------------
 ---------------------------------------------------
 
-sacarAlPistero :: Carrera -> Carrera
-sacarAlPistero (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-    Carrera cantidadVueltas longitudDePista publico trampa (tail participantes)
+sacarAlPistero :: [Participante] -> [Participante]
+sacarAlPistero participantes = tail participantes
     
 
-lluvia :: Carrera -> Carrera
-lluvia (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-    Carrera cantidadVueltas longitudDePista publico trampa (map (modificarVelocidad (+(-10))) participantes)
+lluvia :: [Participante] -> [Participante]
+lluvia participantes= (map (modificarVelocidad (+(-10))) participantes)
 
 
-neutralizarTrucos :: Carrera -> Carrera
-neutralizarTrucos (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-    Carrera cantidadVueltas longitudDePista publico trampa (map (modificarTruco inutilidad) participantes)
+neutralizarTrucos :: [Participante] -> [Participante]
+neutralizarTrucos participantes = (map (modificarTruco inutilidad) participantes)
 
 modificarTruco :: (Participante -> Participante) -> Participante -> Participante
 modificarTruco nuevoTruco (Participante nombre nivelDeNafta velocidad enamorade truco) =
@@ -189,71 +188,82 @@ inutilidad :: Participante -> Participante
 inutilidad uneParticipante = uneParticipante
 
 
-pocaReserva :: Carrera -> Carrera 
-pocaReserva (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-    Carrera cantidadVueltas longitudDePista publico trampa (sacarParticipantesConNafta (<30) participantes)
+pocaReserva :: [Participante] -> [Participante] 
+pocaReserva participantes = (sacarParticipantesConNafta (<30) participantes)
 
 sacarParticipantesConNafta :: (Int -> Bool) -> [Participante] -> [Participante]
 sacarParticipantesConNafta minNafta participantes =
     filter (not.minNafta.nivelDeNafta) participantes
 
 
-podio :: Carrera -> Carrera
-podio (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-    Carrera cantidadVueltas longitudDePista publico trampa (take 3 participantes)
-
+podio :: [Participante] -> [Participante]
+podio participantes = take 3 participantes
 ---------------------------------------------------
 ----------------------- TP2 -----------------------
 ----------------------- 3.3 -----------------------
 ---------------------------------------------------
 
-{--darVuelta :: Carrera -> Carrera
-darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) =
-  Carrera cantidadVueltas longitudDePista publico trampa ((sufrirPorParticipante trampa).(realizarTrucoSiHay publico).(restarCombustibleSegun longitudDePista) participantes)
---}
-
-restarCombustibleDeLosParticipantes :: Int -> [Participante] -> [Participante]
-restarCombustibleDeLosParticipantes kms lista =
- map (resComDeUnParticipante kms ) lista
- 
+--PUNTO 1--
+restarCombustibleDeLosParticipantes :: Carrera -> Carrera
+restarCombustibleDeLosParticipantes (Carrera cantidadVueltas longitudDePista publico trampa participantes) = Carrera cantidadVueltas longitudDePista publico trampa  (map (resComDeUnParticipante longitudDePista ) participantes)
 resComDeUnParticipante :: Int -> Participante -> Participante
 resComDeUnParticipante kms (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante nombre (nivelDeNafta -((div kms 10 )* velocidad)) velocidad enamorade truco
 
-{--realizarTrucoSiHay :: [Enamorade] ->  [Participante] -> [Participante]
-realizarTrucoSiHay publico [(Participante nombre nivelDeNafta velocidad enamorade truco)] =
-     map puedeRealizarTruco --}
 
-{--puedeRealizarTruco :: [Enamorade] -> Participante -> Participante
-puedeRealizarTruco publico (Participante nombre nivelDeNafta velocidad enamorade truco) = (Participante nombre nivelDeNafta velocidad (enamorade) truco)
- --}
+--PUNTO 2--
 
---sufrirPorParticipante :: (Carrera -> Carrera) -> [Participante] -> [Participante] 
---sufrirPorParticipante trampaPista (Participante nombre nivelDeNafta velocidad enamorade truco)=(Participante nombre nivelDeNafta velocidad enamorade truco (trampaPista . trampa)) 
--- en este abria que ver si se puede agregar un campo al participante que sea trampa para poder hacerlo
 
-{--correrCarrera :: Carrera -> Carrera
-correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes)
-     | cantidadVueltas == 0 = (Carrera cantidadVueltas longitudDePista publico trampa participantes)
-     | otherwise = darVuelta (Carrera cantidadVueltas-1 longitudDePista publico trampa participantes)
---}
+estaElEnamoradeYPuedeRealizarTruco :: Participante -> [String]  -> [Participante]
+estaElEnamoradeYPuedeRealizarTruco (Participante nombre nivelDeNafta velocidad enamorade truco) publico
+ |(elem enamorade publico) && (puedeRealizarTruco (Participante nombre nivelDeNafta velocidad enamorade truco))  = [(hazLoTuyo (Participante nombre nivelDeNafta velocidad enamorade truco))]
+ |otherwise = [(Participante nombre nivelDeNafta velocidad enamorade truco)]
+
+mapeaParticipantes :: [Participante] -> [String]-> [Participante]
+mapeaParticipantes [] publico = []
+mapeaParticipantes (x:xs) publico = (estaElEnamoradeYPuedeRealizarTruco x publico) ++ (mapeaParticipantes xs publico)
+
+hazLoTuyo :: Participante -> Participante
+hazLoTuyo uneParticipante =
+    (truco uneParticipante) $ uneParticipante  
+
+realizarTrucoSiHay :: Carrera -> Carrera 
+realizarTrucoSiHay (Carrera cantidadVueltas longitudDePista publico trampa participantes)  = Carrera cantidadVueltas longitudDePista publico trampa (mapeaParticipantes participantes publico)
+
+--PUNTO 3--
+sufrirTrampaDeCarrera :: Carrera -> Carrera
+sufrirTrampaDeCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes) = Carrera cantidadVueltas longitudDePista publico trampa (trampa participantes) 
+
+
+--PUNTO 4--
+darVuelta :: Carrera -> Carrera
+darVuelta carrera = sufrirTrampaDeCarrera.realizarTrucoSiHay.restarCombustibleDeLosParticipantes $  carrera
+correrCarrera:: Carrera -> [Carrera]
+correrCarrera (Carrera cantidadVueltas longitudDePista publico trampa participantes) = take cantidadVueltas $ iterate (darVuelta) (darVuelta (Carrera cantidadVueltas longitudDePista publico trampa participantes) )
+
 ---------------------------------------------------
 ----------------------- TP2 -----------------------
 ----------------------- 3.4 -----------------------
 ---------------------------------------------------
 
-{--quienGana :: Carrera -> Participante
-quienGana = corredorConMayorVelocidad.correrCarrera
- 
-corredorConMayorVelocidad :: (Carrera ->[Participante]) -> Participante
-corredorConMayorVelocidad corredores = filter ((=) . velocidadMaxima) corredores
+obtenerUltimaVuelta :: Carrera -> Carrera
+obtenerUltimaVuelta carrera = last (correrCarrera carrera) 
 
-velocidadMaxima :: (Carrera ->[Participante]) -> Int
-velocidadMaxima corredores = maximum velocidad corredores   
+--participanteConMayorVelocidad :: [Participante] -> Participante
+--participanteConMayorVelocidad participantes = filter (== participante velocidad) participantes
 
-corredores :: Carrera -> [Participante]
-corredores (Carrera _ _ _ _ participantes) = participantes
---}
- 
+maximaVelocidad ::Carrera -> Int
+maximaVelocidad (Carrera _ _ _ _ participantes) = maximum (map (velocidad) participantes) 
+
+
+--quienGana :: Carrera -> Participante
+--quienGana carrera = --}
+--ordenarVelocidad participante1 participante2 
+ --   | velocidad participante1 > velocidad participante2 = GT
+  --  | velocidad participante1 <= velocidad participante2 = LT
+
+
+quienGana :: Carrera -> Int
+quienGana carrera = maximaVelocidad.obtenerUltimaVuelta $ carrera
 
 ---------------------------------------------------
 ----------------------- TP2 -----------------------
@@ -262,7 +272,7 @@ corredores (Carrera _ _ _ _ participantes) = participantes
 
 elGranTruco :: [(Participante -> Participante)] -> Participante -> Participante
 elGranTruco trucos uneParticipante =
-    foldl1 (.) (reverse trucos) uneParticipante
+    foldl1 (.) trucos uneParticipante
 
 ---------------------------------------------------
 ----------------------- TP2 -----------------------
