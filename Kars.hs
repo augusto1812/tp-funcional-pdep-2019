@@ -205,9 +205,10 @@ podio participantes = take 3 participantes
 
 --PUNTO 1--
 restarCombustibleDeLosParticipantes :: Carrera -> Carrera
-restarCombustibleDeLosParticipantes (Carrera cantidadVueltas longitudDePista publico trampa participantes) = Carrera cantidadVueltas longitudDePista publico trampa  (map (resComDeUnParticipante longitudDePista ) participantes)
+restarCombustibleDeLosParticipantes (Carrera cantidadVueltas longitudDePista publico trampa participantes) = Carrera cantidadVueltas longitudDePista publico trampa  (map (resComDeUnParticipante longitudDePista) participantes)
+
 resComDeUnParticipante :: Int -> Participante -> Participante
-resComDeUnParticipante kms (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante nombre (nivelDeNafta -((div kms 10 )* velocidad)) velocidad enamorade truco
+resComDeUnParticipante kms (Participante nombre nivelDeNafta velocidad enamorade truco) = Participante nombre (nivelDeNafta - ((div kms 10)* velocidad)) velocidad enamorade truco
 
 
 --PUNTO 2--

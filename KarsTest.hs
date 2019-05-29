@@ -44,19 +44,19 @@ main = hspec $ do
                 velocidad (head (participantes (darVuelta potreroFunes))) `shouldBe` 40
             
             it "Cantidad de participantes tras dar dos vueltas en potreroFunes." $ do
-                length (participantes ((darVuelta.darVuelta) potreroFunes))) `shouldBe` 2
+                length (participantes (darVuelta.darVuelta $ potreroFunes)) `shouldBe` 2
             
             it "Consultar el nivelDeNafta del primer participante (gushtav) luego de dos vueltas en potreroFunes." $ do
-                nivelDeNafta (head (participantes (darVuelta.darVuelta potreroFunes))) `shouldBe` 70
+                nivelDeNafta (head (participantes (darVuelta.darVuelta $ potreroFunes))) `shouldBe` 70
 
             it "Rodra debe ser el único participante luego de correr la carrera de potreroFunes." $ do
-                head (participantes (correrCarrera potreroFunes)) `shouldBe` rodra
+                nombre (head (participantes (correrCarrera potreroFunes))) `shouldBe` rodra
 
         describe "Punto 3.4" $ do
 
             it "Ganador de potreroFunes." $ do
                 quienGana potreroFunes `shouldBe` rodra
-  
+
         describe "Punto 3.5" $ do
 
             it "Velocidad de rodra tras realizar elGranTruco con nitro, deReversa e impresionar." $ do
